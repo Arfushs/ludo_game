@@ -1,0 +1,14 @@
+Oyun başlamadan önce oyuncuları seçmek için 60 sn geri sayım olacak, bu süre içerisinde en çok jeton gönderen ilk 4 kişi oynamaya hak kazanacak. 
+
+Zar sırayla otomatik atılacak. 6 gelirse ikinci zar atılacak. Tekrar 6 gelirse yeniden atılacak. Diyelim ki 665 geldi oyuncu bütün zarları oynayacak. 666 gelirse oynayamadan diğer oyuncuya geçecek.
+
+Her pul için bir sayı olacak 1-2-3-4. (Bu sayılar oyuncu kendi sırasındayken pulların üzerinde görülecek)
+
+Diyelim ki oyuncu 4 attı ve 2. Pulu ilerletmek istiyor. Chatten 24 yazacak. 2. Pul 4 ileri gidecek. (Burada yaklaşık 10-15 saniye zaman ayarlamamız gerekiyor, eğer yazmazsa rastgele bir pul oynayacak)
+Öğretici olması açısından 24 yazdığında 2. Pul nereye gidecek ise o kare içerisinde 24 yazısı çıkacak (oyuncu chatten yazana kadar) mesela 3. Pulu götürecekse 34 yazacak. 
+
+İlk kırma işlemi gerçekleşene kadar ANA KAPI kilitli kalacak. kırmayı gerçekleştiren oyuncu için ana kapı kilidi açılacak. Ana kapıya gelince eğer kapı kilitli ise normal başa dönmüş gibi devam edecek. Her oyuncu içeri girmek için ilk önce kırma işlemi gerçekleştirmek zorunda. İçeri 1 pul sokup HOME alanına getiren ilk oyuncu oyunu kazanmış olacak. (4 pul sokmaya gerek yok tek pulda oyun bitecek)
+
+Oyun sırasında oyunda olmayan başka izleyiciler hediye atarsa. Sıradaki oyun için oyuncu seçme ekranında 60 saniyelik ekranda o hediye atanların puanlarını görmeliyiz. Boşa gitmesin.
+
+Beğeni ve yorum gönderen izleyicilerin de katkısı olması açısından. Beğeni&yorum gönderince yukardan bir ateş ya da yıldırım masadaki herhangi bir kare içine anlık olarak rastgele düşecek. Eğer orada pul var ise, pul 1 geri gidecek. Diyelim ki 500 puanda ateş düşecek, ilk önce sarıya düşecek. Sonraki 500 puanda maviye düşecek. Beğeni 1 puan ve yorum için 2 puan verirsek puan dolunca patlama gerçekleşir. Burada ufak bir hediye belirleyeceğiz bu hediyeyi gönderen oyuncu 30-60sn (ya da sadece bir patlamalık) korumaya alacak kendini. ateş sırasında koruması varsa  diğer oyuncuda ateş patlayacak. Oyun oynayan bir oyuncu da karşı rakibe ateş düşürebilir. ( Yine bunun için bir hediye belirleriz o an ateş düşme sırası kimde ise oraya düşer)
