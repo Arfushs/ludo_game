@@ -3,7 +3,17 @@ guid: 1cbc5923c1c0cca47874c7567e875c4d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sprites1
+    second: {fileID: 2100000, guid: 045b80a0eea34334381151977b0fb27a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Total1
+    second: {fileID: 2100000, guid: 7b7657cfa3fc6194a89418297d920144, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
