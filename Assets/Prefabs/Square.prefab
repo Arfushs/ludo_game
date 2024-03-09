@@ -333,6 +333,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469aaa44a3d452b40b97d03573b068e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onePawnPositionList:
+  - {fileID: 4740485350761038924}
+  twoPawnPositionList:
+  - {fileID: 6910631337428112084}
+  - {fileID: 8848621549161026397}
+  threePawnPositionList:
+  - {fileID: 1658771167067093518}
+  - {fileID: 352357485428521598}
+  - {fileID: 1328002581861535518}
+  fourPawnPositionList:
+  - {fileID: 1341852624265403556}
+  - {fileID: 3696978801468376582}
+  - {fileID: 3900374001138303813}
+  - {fileID: 5609741460468640652}
 --- !u!1 &836882057490497250
 GameObject:
   m_ObjectHideFlags: 0

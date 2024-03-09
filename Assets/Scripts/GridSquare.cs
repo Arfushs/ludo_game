@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class GridSquare : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("Position Objects")]
+    [SerializeField] private List<Transform> onePawnPositionList;
+    [SerializeField] private List<Transform> twoPawnPositionList;
+    [SerializeField] private List<Transform> threePawnPositionList;
+    [SerializeField] private List<Transform> fourPawnPositionList;
+
+    private List<Pawn> pawnList = new List<Pawn>();
+
+    public void RegisterPawn(Pawn pawm)
     {
-        
+        pawnList.Add(pawm);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UnRegisterPawn(Pawn pawn)
     {
-        
+        pawnList.Remove(pawn);
     }
 }
