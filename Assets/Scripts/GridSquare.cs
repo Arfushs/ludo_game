@@ -12,13 +12,21 @@ public class GridSquare : MonoBehaviour
 
     private List<Pawn> pawnList = new List<Pawn>();
 
-    public void RegisterPawn(Pawn pawm)
+    public void RegisterPawn(Pawn pawn)
     {
-        pawnList.Add(pawm);
+        pawnList.Add(pawn);
+        //Debug.Log("This pawn '"+pawn.name+ "'" + " registered on " + name);
     }
 
     public void UnRegisterPawn(Pawn pawn)
     {
         pawnList.Remove(pawn);
+        //ebug.Log("This pawn '"+pawn.name+ "'" + " unregistered on " + name);
+    }
+
+    // TODO Ustundeki piyon sayısına göre pozisyon vermesini yap
+    public Vector3 GetPosition()
+    {
+        return onePawnPositionList[0].position;
     }
 }
