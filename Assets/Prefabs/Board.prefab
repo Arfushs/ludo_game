@@ -1229,6 +1229,11 @@ PrefabInstance:
       objectReference: {fileID: 723480592227286126}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
+      propertyPath: pawnIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
       propertyPath: _pawnColor
       value: 0
       objectReference: {fileID: 0}
@@ -1670,6 +1675,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 1027081221138541607}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor
@@ -3251,6 +3261,11 @@ PrefabInstance:
       objectReference: {fileID: 2922243968716895830}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
+      propertyPath: pawnIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
       propertyPath: _pawnColor
       value: 1
       objectReference: {fileID: 0}
@@ -3463,6 +3478,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 2998093781867588454}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor
@@ -3944,6 +3964,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 2599534592450766995}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor
@@ -5213,6 +5238,11 @@ PrefabInstance:
       objectReference: {fileID: 5691048046034370286}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
+      propertyPath: pawnIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
       propertyPath: _pawnColor
       value: 2
       objectReference: {fileID: 0}
@@ -5440,6 +5470,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 4846475243661659476}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor
@@ -6527,6 +6562,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 6912789088862346281}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor
@@ -7709,6 +7749,11 @@ PrefabInstance:
       objectReference: {fileID: 7759278193495778216}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
+      propertyPath: pawnIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
       propertyPath: _pawnColor
       value: 2
       objectReference: {fileID: 0}
@@ -8190,6 +8235,11 @@ PrefabInstance:
       objectReference: {fileID: 7013959500912881984}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
+      propertyPath: pawnIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
       propertyPath: _pawnColor
       value: 0
       objectReference: {fileID: 0}
@@ -8417,6 +8467,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 7220353285268214493}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor
@@ -9209,6 +9264,11 @@ PrefabInstance:
       propertyPath: greenPawn
       value: 
       objectReference: {fileID: 8833919849357108284}
+    - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
+        type: 3}
+      propertyPath: pawnIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1985168758046258869, guid: 1e4036a8c2c5da74ab330115dc78158d,
         type: 3}
       propertyPath: _pawnColor

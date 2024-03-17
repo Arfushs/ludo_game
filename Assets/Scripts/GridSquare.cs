@@ -10,6 +10,17 @@ public class GridSquare : MonoBehaviour
     [SerializeField] private List<Transform> threePawnPositionList;
     [SerializeField] private List<Transform> fourPawnPositionList;
 
+    [Header("Grid Info")]
+    [SerializeField] private bool isProtection = false;
+    [SerializeField] private bool isStar = false;
+    [SerializeField] private bool isLock = false;
+    [SerializeField] private TeamColor starColor;
+
+    public bool IsProtection => isProtection;
+    public TeamColor StarColor => starColor;
+    public bool IsStar => isStar;
+    public bool IsLock => isLock;
+
     private List<Pawn> pawnList = new List<Pawn>();
 
     public void RegisterPawn(Pawn pawn)
