@@ -21,7 +21,7 @@ public class GridSquare : MonoBehaviour
     public void UnRegisterPawn(Pawn pawn)
     {
         pawnList.Remove(pawn);
-        //ebug.Log("This pawn '"+pawn.name+ "'" + " unregistered on " + name);
+        //Debug.Log("This pawn '"+pawn.name+ "'" + " unregistered on " + name);
     }
 
     // TODO Ustundeki piyon sayısına göre pozisyon vermesini yap

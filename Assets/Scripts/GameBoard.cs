@@ -9,7 +9,11 @@ public class GameBoard : MonoBehaviour
     [Header("Grids Info")]
     [SerializeField] private Transform gridSquareContainer;
     private List<GridSquare> gridList = new List<GridSquare>();
-
+    [SerializeField] private GridSquare greenInitialGrid;
+    [SerializeField] private GridSquare redInitialGrid;
+    [SerializeField] private GridSquare yellowInitialGrid;
+    [SerializeField] private GridSquare blueInitialGrid;
+    
     [Header("Locked Info")] 
     [SerializeField] private bool isGreenLocked;
     [SerializeField] private bool isYellowLocked;
@@ -17,7 +21,16 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private bool isRedLocked;
 
     [Header("Pawn Info")] 
-    [SerializeField] private Pawn testPawn;
+    [SerializeField] private List<Pawn> bluePawnsList = new List<Pawn>();
+    [SerializeField] private List<Pawn> redPawnsList = new List<Pawn>();
+    [SerializeField] private List<Pawn> yellowPawnsList = new List<Pawn>();
+    [SerializeField] private List<Pawn> greenPawnsList = new List<Pawn>();
+    [Space(10)]
+    [SerializeField] private List<Transform> bluePawnsPosList = new List<Transform>();
+    [SerializeField] private List<Transform> redPawnsPosList = new List<Transform>();
+    [SerializeField] private List<Transform> yellowPawnsPosList = new List<Transform>();
+    [SerializeField] private List<Transform> greenPawnsPosList = new List<Transform>();
+    
     
     private void Awake()
     {
@@ -35,14 +48,9 @@ public class GameBoard : MonoBehaviour
 
     private void Start()
     {
-        testPawn.Initialize(gridList[0],TeamColor.BLUE);
+        PutPawnsIntoInitialPositions();
     }
-
-    [Button("Move Pawn")]
-    public void TestFunc(int dice)
-    {
-        testPawn.StartCoroutine(testPawn.Move(GetPawnPossiblePath(testPawn,dice)));
-    }
+    
 
     private List<GridSquare> GetPawnPossiblePath(Pawn p, int dice)
     {
@@ -83,5 +91,73 @@ public class GameBoard : MonoBehaviour
         }
         return b;
     }
+
+    private void PutPawnsIntoInitialPositions(List<Pawn> pawnList,List<Transform> posList)
+    {
+        int counter = 0;
+        foreach (Pawn p in pawnList)
+        {
+            p.transform.position = posList[counter].position;
+            counter++;
+        }
+        
+    }
+
+    private void PutPawnsIntoInitialPositions()
+    {
+        PutPawnsIntoInitialPositions(bluePawnsList,bluePawnsPosList);
+        PutPawnsIntoInitialPositions(redPawnsList,redPawnsPosList);
+        PutPawnsIntoInitialPositions(yellowPawnsList,yellowPawnsPosList);
+        PutPawnsIntoInitialPositions(greenPawnsList,greenPawnsPosList);
+    }
+
+    #region Utility Functions
+    
+    
+    [Button("Put Pawn Into Game")]
+    public void PutPawnIntoGame(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                FindPassivePawn(bluePawnsList)?.Initialize(blueInitialGrid);
+                break;
+            case TeamColor.RED:
+                FindPassivePawn(redPawnsList)?.Initialize(redInitialGrid);
+                break;
+            case TeamColor.GREEN:
+                FindPassivePawn(greenPawnsList)?.Initialize(greenInitialGrid);
+                break;
+            case TeamColor.YELLOW:
+                FindPassivePawn(yellowPawnsList)?.Initialize(yellowInitialGrid);
+                break;
+        }
+    }
+
+    private Pawn FindPassivePawn(List<Pawn> pawns)
+    {
+        foreach (Pawn p in pawns)
+        {
+            if (p.IsPassive())
+                return p;
+        }
+        return null;
+    }
+    
+    [Button("Move Pawn")]
+    public void MovePawn(Pawn p,int dice)
+    {
+        if (!p.IsPassive())
+        {
+            p.StartCoroutine(p.Move(GetPawnPossiblePath(p,dice)));
+        }
+        else
+        {
+            Debug.LogWarning("This pawn is passive cannot be move !");
+        }
+    }
+
+    #endregion
+    
     
 }
