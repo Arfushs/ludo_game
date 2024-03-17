@@ -51,7 +51,6 @@ public class GameBoard : MonoBehaviour
         PutPawnsIntoInitialPositions();
     }
     
-
     private List<GridSquare> GetPawnPossiblePath(Pawn p, int dice)
     {
         List<GridSquare> possiblePath = new List<GridSquare>();
@@ -92,13 +91,12 @@ public class GameBoard : MonoBehaviour
         return b;
     }
 
+    // Pawnları Başlangıc pozisyonuna koyar
     private void PutPawnsIntoInitialPositions(List<Pawn> pawnList,List<Transform> posList)
     {
-        int counter = 0;
         foreach (Pawn p in pawnList)
         {
-            p.transform.position = posList[counter].position;
-            counter++;
+            p.transform.position = posList[p.pawnIndex].position;
         }
         
     }
@@ -112,7 +110,6 @@ public class GameBoard : MonoBehaviour
     }
 
     #region Utility Functions
-    
     
     [Button("Put Pawn Into Game")]
     public void PutPawnIntoGame(TeamColor color)
@@ -154,6 +151,26 @@ public class GameBoard : MonoBehaviour
         else
         {
             Debug.LogWarning("This pawn is passive cannot be move !");
+        }
+    }
+
+    [Button("DO Pawn Passive")]
+    public void DoPassivePawn(Pawn p)
+    {
+        switch (p.GetPawnColor())
+        {
+            case TeamColor.BLUE:
+                p.DoPassive(bluePawnsPosList[p.pawnIndex]);
+                break;
+            case TeamColor.RED:
+                p.DoPassive(redPawnsPosList[p.pawnIndex]);
+                break;
+            case TeamColor.GREEN:
+                p.DoPassive(greenPawnsPosList[p.pawnIndex]);
+                break;
+            case TeamColor.YELLOW:
+                p.DoPassive(yellowPawnsPosList[p.pawnIndex]);
+                break;
         }
     }
 

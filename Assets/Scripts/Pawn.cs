@@ -13,7 +13,11 @@ public class Pawn : MonoBehaviour
     [SerializeField] private GameObject redPawn;
     
     private GridSquare _currentGridSquare = null;
+    
+    [Header("Pawn Info")]
     [SerializeField] private TeamColor _pawnColor;
+    public int pawnIndex;
+    
     private bool _isPassive = true;
 
     private void Awake()
@@ -23,7 +27,6 @@ public class Pawn : MonoBehaviour
 
     public void Initialize(GridSquare gridSquare)
     {
-        transform.position = gridSquare.GetPosition();
         _currentGridSquare = gridSquare;
         gridSquare.RegisterPawn(this);
         _isPassive = false;
@@ -73,5 +76,13 @@ public class Pawn : MonoBehaviour
         greenPawn.SetActive(false);
         bluePawn.SetActive(false);
         redPawn.SetActive(false);
+    }
+
+    
+    public void DoPassive(Transform pos)
+    {
+        _isPassive = true;
+        _currentGridSquare.UnRegisterPawn(this);
+        transform.DOJump(pos.position, .5f, 1, 1);
     }
 }
