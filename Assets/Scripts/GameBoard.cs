@@ -13,6 +13,10 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private GridSquare redInitialGrid;
     [SerializeField] private GridSquare yellowInitialGrid;
     [SerializeField] private GridSquare blueInitialGrid;
+    [SerializeField] private List<GridSquare> greenLockedGridList = new List<GridSquare>();
+    [SerializeField] private List<GridSquare> blueLockedGridList = new List<GridSquare>();
+    [SerializeField] private List<GridSquare> redLockedGridList = new List<GridSquare>();
+    [SerializeField] private List<GridSquare> yellowLockedGridList = new List<GridSquare>();
     
     [Header("Locked Info")] 
     [SerializeField] private bool isGreenLocked;
@@ -54,20 +58,74 @@ public class GameBoard : MonoBehaviour
     private List<GridSquare> GetPawnPossiblePath(Pawn p, int dice)
     {
         List<GridSquare> possiblePath = new List<GridSquare>();
-        int currentIndex = gridList.IndexOf(p.GetGrid());
-        if (!CheckIsLocked(p.GetPawnColor()))
+        int currentIndex;
+        List<GridSquare> lockedList = GetLockedList(p.GetPawnColor());
+
+        if (!p.GetGrid().IsLock)
         {
+            // Eger piyon yıldızın ustundeyse ve kilitler acıksa
+            if (p.GetGrid().IsStar && p.GetPawnColor() == p.GetGrid().StarColor &&
+                CheckIsLocked(p.GetPawnColor()))
+            {
+                FillPathToLockedList(possiblePath,lockedList,dice);
+                return possiblePath;
+            }
+            
+            currentIndex = gridList.IndexOf(p.GetGrid());
             for (int i = 1; i <= dice; i++)
             {
-                possiblePath.Add(gridList[(currentIndex + i)%gridList.Count]);
+                // Eger kilitler acık degilse
+                if(!CheckIsLocked(p.GetPawnColor()))
+                    possiblePath.Add(gridList[(currentIndex + i)%gridList.Count]);
+                else
+                {
+                    // kilitler acıksa
+                    possiblePath.Add(gridList[(currentIndex + i)%gridList.Count]);
+                    
+                    if (gridList[(currentIndex + i) % gridList.Count].IsStar
+                        && gridList[(currentIndex + i) % gridList.Count].StarColor == p.GetPawnColor())
+                    {
+                        FillPathToLockedList(possiblePath,lockedList,dice - i);
+                        return possiblePath;
+                    }
+                }
             }
         }
         else
         {
-            // TODO Kilitlerin açık olma durumunu yaz
+            currentIndex = lockedList.IndexOf(p.GetGrid());
+            for (int i = 1; i <= dice; i++)
+            {
+                possiblePath.Add(lockedList[(currentIndex + i)%lockedList.Count]);
+            }
+        }
+        
+        return possiblePath;
+    }
+
+    private void FillPathToLockedList(List<GridSquare> path, List<GridSquare> lockedList, int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            path.Add(lockedList[i]);
+        }
+    }
+
+    private List<GridSquare> GetLockedList(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                return blueLockedGridList;
+            case TeamColor.RED:
+                return redLockedGridList;
+            case TeamColor.GREEN:
+                return greenLockedGridList;
+            case TeamColor.YELLOW:
+                return yellowLockedGridList;
         }
 
-        return possiblePath;
+        return null;
     }
 
     private bool CheckIsLocked(TeamColor color)

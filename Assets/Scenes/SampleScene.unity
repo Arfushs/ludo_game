@@ -435,16 +435,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1849693666580111255, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2153234887496912862, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2652131747987156327, guid: 2b51128926055f84bbd443f36a603a88,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -499,56 +489,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Board
-      objectReference: {fileID: 0}
-    - target: {fileID: 4013368784655649642, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4195772921527060639, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4264022903280981423, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5498356762388119504, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5828534071440518829, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6727134701948738839, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7582192712337016773, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284275119085834937, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8616202319243522340, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8651205139762544721, guid: 2b51128926055f84bbd443f36a603a88,
-        type: 3}
-      propertyPath: pawnIndex
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
