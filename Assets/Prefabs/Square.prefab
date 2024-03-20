@@ -277,6 +277,7 @@ Transform:
   m_Children:
   - {fileID: 2978773829768129723}
   - {fileID: 5452869617218328117}
+  - {fileID: 6872853595805927120}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &6715910247045119589
@@ -347,6 +348,44 @@ MonoBehaviour:
   - {fileID: 3696978801468376582}
   - {fileID: 3900374001138303813}
   - {fileID: 5609741460468640652}
+  isProtection: 0
+  isStar: 0
+  isLock: 0
+  starColor: 0
+  brokePawnEffectPrefab: {fileID: 2748365146258640898, guid: dfc9c75da7123f7458f1e2c2e0e07a84,
+    type: 3}
+  effectSpawnPos: {fileID: 6872853595805927120}
+--- !u!1 &807142426811704059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6872853595805927120}
+  m_Layer: 0
+  m_Name: EffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6872853595805927120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807142426811704059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6180389102744596898}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &836882057490497250
 GameObject:
   m_ObjectHideFlags: 0

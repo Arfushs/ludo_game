@@ -50,6 +50,16 @@ public class GameBoard : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        EventManager.OnPawnBroken += OnPawnBroken;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnPawnBroken -= OnPawnBroken;
+    }
+
     private void Start()
     {
         PutPawnsIntoInitialPositions();
@@ -233,6 +243,11 @@ public class GameBoard : MonoBehaviour
     }
 
     #endregion
+
+    private void OnPawnBroken(Pawn p)
+    {
+        DoPassivePawn(p);
+    }
     
     
 }
