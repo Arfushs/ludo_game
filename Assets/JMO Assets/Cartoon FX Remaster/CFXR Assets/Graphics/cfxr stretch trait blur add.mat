@@ -10,13 +10,17 @@ Material:
   m_Name: cfxr stretch trait blur add
   m_Shader: {fileID: -6465566751694194690, guid: 1a29b4d27eb8b04479ef89c00dea533d,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _CFXR_ADDITIVE
+  - _CFXR_DITHERED_SHADOWS_ON
+  - _CFXR_FONT_COLORS
+  - _CFXR_HDR_BOOST
   - _CFXR_SINGLE_CHANNEL
   - _FADING_ON
   m_InvalidKeywords:
   - _
-  - _CFXR_DITHERED_SHADOWS_OFF
   - _CFXR_OVERLAYBLEND_RGBA
   - _CFXR_OVERLAYTEX_OFF
   m_LightmapFlags: 0
@@ -25,6 +29,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -65,7 +70,7 @@ Material:
     - _BacklightTransmittance: 1
     - _BlendingType: 3
     - _BumpScale: 1
-    - _CFXR_DITHERED_SHADOWS: 0
+    - _CFXR_DITHERED_SHADOWS: 1
     - _CFXR_OVERLAYBLEND: 0
     - _CFXR_OVERLAYTEX: 0
     - _Cutoff: 0.1
@@ -77,8 +82,8 @@ Material:
     - _DstBlend: 1
     - _EdgeFadePow: 1
     - _FadeAlongU: 0
-    - _HdrBoost: 0
-    - _HdrMultiply: 2
+    - _HdrBoost: 1
+    - _HdrMultiply: 7
     - _IndirectLightingMix: 0.5
     - _InvertDissolveTex: 0
     - _LightingWorldPosStrength: 0.2
@@ -86,9 +91,9 @@ Material:
     - _OVERLAYTEX: 0
     - _ReceivedShadowsStrength: 0.5
     - _SecondColorSmooth: 0.2
-    - _ShadowStrength: 1
+    - _ShadowStrength: 0.293
     - _SingleChannel: 1
-    - _SoftParticlesFadeDistanceFar: 1
+    - _SoftParticlesFadeDistanceFar: 10
     - _SoftParticlesFadeDistanceNear: 0
     - _SrcBlend: 5
     - _UVDistortionAdd: 0
@@ -99,7 +104,7 @@ Material:
     - _UseEF: 0
     - _UseEmission: 0
     - _UseFB: 0
-    - _UseFontColor: 0
+    - _UseFontColor: 1
     - _UseGradientMap: 0
     - _UseLighting: 0
     - _UseLightingWorldPosOffset: 0
