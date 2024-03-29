@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameBoard : MonoBehaviour
 {
@@ -18,11 +19,12 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private List<GridSquare> redLockedGridList = new List<GridSquare>();
     [SerializeField] private List<GridSquare> yellowLockedGridList = new List<GridSquare>();
     
+    
     [Header("Locked Info")] 
-    [SerializeField] private bool isGreenLocked;
-    [SerializeField] private bool isYellowLocked;
-    [SerializeField] private bool isBlueLocked;
-    [SerializeField] private bool isRedLocked;
+    [SerializeField] private bool isGreenLockedOpen;
+    [SerializeField] private bool isYellowLockedOpen;
+    [SerializeField] private bool isBlueLockedOpen;
+    [SerializeField] private bool isRedLockedOpen;
 
     [Header("Pawn Info")] 
     [SerializeField] private List<Pawn> bluePawnsList = new List<Pawn>();
@@ -53,11 +55,13 @@ public class GameBoard : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnPawnBroken += OnPawnBroken;
+        EventManager.OnLockedOpen += OnLockedOpen;
     }
 
     private void OnDisable()
     {
         EventManager.OnPawnBroken -= OnPawnBroken;
+        EventManager.OnLockedOpen -= OnLockedOpen;
     }
 
     private void Start()
@@ -144,16 +148,16 @@ public class GameBoard : MonoBehaviour
         switch (color)
         {
             case TeamColor.RED:
-                b = isRedLocked;
+                b = isRedLockedOpen;
                 break;
             case TeamColor.GREEN:
-                b = isGreenLocked;
+                b = isGreenLockedOpen;
                 break;
             case TeamColor.YELLOW:
-                b = isYellowLocked;
+                b = isYellowLockedOpen;
                 break;
             case TeamColor.BLUE:
-                b = isBlueLocked;
+                b = isBlueLockedOpen;
                 break;
         }
         return b;
@@ -247,6 +251,25 @@ public class GameBoard : MonoBehaviour
     private void OnPawnBroken(Pawn p)
     {
         DoPassivePawn(p);
+    }
+
+    private void OnLockedOpen(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                isBlueLockedOpen = true;
+                break;
+            case TeamColor.RED:
+                isRedLockedOpen = true;
+                break;
+            case TeamColor.GREEN:
+                isGreenLockedOpen = true;
+                break;
+            case TeamColor.YELLOW:
+                isYellowLockedOpen = true;
+                break; 
+        }
     }
     
     

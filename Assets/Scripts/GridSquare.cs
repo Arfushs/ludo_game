@@ -101,7 +101,10 @@ public class GridSquare : MonoBehaviour
             if (p.GetPawnColor() != color)
                 EventManager.OnPawnBroken.Invoke(p);
         }
+        EventManager.OnLockedOpen.Invoke(color);
     }
+    
+    
 
     [Button("Spawn Effect")]
     private void SpawnEffect()
