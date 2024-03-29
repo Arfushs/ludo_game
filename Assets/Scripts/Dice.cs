@@ -28,6 +28,7 @@ public class Dice : MonoBehaviour
     public void RollTheDice()
     {
         StopAllCoroutines();
+        //TODO pozisyon işlemini burda yapma
         transform.position = initialPos;
         _rb.isKinematic = false;
         Vector3 horizontalVector = new Vector3(0, 0, 1) * Random.Range(-_horizontalThrowStrength, _horizontalThrowStrength);
