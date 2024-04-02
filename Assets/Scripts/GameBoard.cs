@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,7 +37,8 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private List<Transform> redPawnsPosList = new List<Transform>();
     [SerializeField] private List<Transform> yellowPawnsPosList = new List<Transform>();
     [SerializeField] private List<Transform> greenPawnsPosList = new List<Transform>();
-    
+
+    private Animator _lockAnimator;
     
     private void Awake()
     {
@@ -49,7 +51,9 @@ public class GameBoard : MonoBehaviour
             gridList.Add(grid);
             counter++;
         }
-        
+
+        _lockAnimator = GetComponent<Animator>();
+
     }
 
     private void OnEnable()
@@ -253,6 +257,28 @@ public class GameBoard : MonoBehaviour
         DoPassivePawn(p);
     }
 
+    [Button("Turn Board")]
+    private void TurnBoardAccordingCoolor(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                transform.DORotate(new Vector3(0,-90,0), 0.5f);
+                break;
+            case TeamColor.RED:
+                transform.DORotate(new Vector3(0,180,0), 0.5f);
+                break;
+            case TeamColor.GREEN:
+                isGreenLockedOpen = true;
+                transform.DORotate(new Vector3(0,90,0), 0.5f);
+                break;
+            case TeamColor.YELLOW:
+                transform.DORotate(new Vector3(0,0,0), 0.5f);
+                break; 
+        }
+    }
+
+    [Button("Unlock Locked Path")]
     private void OnLockedOpen(TeamColor color)
     {
         switch (color)
@@ -265,9 +291,30 @@ public class GameBoard : MonoBehaviour
                 break;
             case TeamColor.GREEN:
                 isGreenLockedOpen = true;
+                _lockAnimator.Play("greenLockedOpen");
                 break;
             case TeamColor.YELLOW:
                 isYellowLockedOpen = true;
+                break; 
+        }
+    }
+    [Button("Lock Locked Path")]
+    private void CloseLocked(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                isBlueLockedOpen = false;
+                break;
+            case TeamColor.RED:
+                isRedLockedOpen = false;
+                break;
+            case TeamColor.GREEN:
+                isGreenLockedOpen = false;
+                _lockAnimator.Play("greenLockedLock");
+                break;
+            case TeamColor.YELLOW:
+                isYellowLockedOpen = false;
                 break; 
         }
     }

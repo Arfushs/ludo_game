@@ -15,6 +15,7 @@ public class Dice : MonoBehaviour
     [SerializeField] private Vector3 _throwVector;
     private Vector3 initialPos;
     private Rigidbody _rb;
+    private MeshRenderer _mesh;
     private int diceValue = -1;
     [Header("Colliders")] 
     [SerializeField] private LayerMask boardLayer;
@@ -28,6 +29,8 @@ public class Dice : MonoBehaviour
 
     private void Awake()
     {
+        _mesh = GetComponentInChildren<MeshRenderer>();
+        _mesh.enabled = false;
         initialPos = transform.position;
         _rb = GetComponent<Rigidbody>();
     }
@@ -36,6 +39,7 @@ public class Dice : MonoBehaviour
     [Button("Roll Dice")]
     public void RollTheDice()
     {
+        _mesh.enabled = true;
         diceValue = -1;
         StopAllCoroutines();
         //TODO pozisyon işlemini burda yapma
@@ -56,7 +60,6 @@ public class Dice : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(.5f);
-        _rb.isKinematic = true;
         CheckAndSeteDiceValue();
         Debug.Log(GetDiceValue());
     }
@@ -78,6 +81,14 @@ public class Dice : MonoBehaviour
         else if (Physics.CheckSphere(_value6Transform.position, _colliderRadius, boardLayer))
             diceValue = 6;
         
+    }
+
+    [Button("Pickup Dice")]
+    public void PickUpDiceFromTable()
+    {
+        _mesh.enabled = false;
+        _rb.isKinematic = true;
+        transform.position = new Vector3(10, 10, 10);
     }
 
     private void OnDrawGizmos()
