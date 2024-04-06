@@ -55,6 +55,7 @@ public class GameBoard : MonoBehaviour
         _lockAnimator = GetComponent<Animator>();
 
     }
+    
 
     private void OnEnable()
     {
@@ -71,6 +72,7 @@ public class GameBoard : MonoBehaviour
     private void Start()
     {
         PutPawnsIntoInitialPositions();
+        
     }
     
     private List<GridSquare> GetPawnPossiblePath(Pawn p, int dice)
@@ -109,6 +111,7 @@ public class GameBoard : MonoBehaviour
                 }
             }
         }
+        // Eğer piyon kilidin üstündeyse
         else
         {
             currentIndex = lockedList.IndexOf(p.GetGrid());
@@ -285,9 +288,11 @@ public class GameBoard : MonoBehaviour
         {
             case TeamColor.BLUE:
                 isBlueLockedOpen = true;
+                _lockAnimator.Play("blueLockedOpen");
                 break;
             case TeamColor.RED:
                 isRedLockedOpen = true;
+                _lockAnimator.Play("redLockedOpen");
                 break;
             case TeamColor.GREEN:
                 isGreenLockedOpen = true;
@@ -295,6 +300,7 @@ public class GameBoard : MonoBehaviour
                 break;
             case TeamColor.YELLOW:
                 isYellowLockedOpen = true;
+                _lockAnimator.Play("yellowLockedOpen");
                 break; 
         }
     }
@@ -305,9 +311,11 @@ public class GameBoard : MonoBehaviour
         {
             case TeamColor.BLUE:
                 isBlueLockedOpen = false;
+                _lockAnimator.Play("blueLockedLock");
                 break;
             case TeamColor.RED:
                 isRedLockedOpen = false;
+                _lockAnimator.Play("redLockedLock");
                 break;
             case TeamColor.GREEN:
                 isGreenLockedOpen = false;
@@ -315,6 +323,7 @@ public class GameBoard : MonoBehaviour
                 break;
             case TeamColor.YELLOW:
                 isYellowLockedOpen = false;
+                _lockAnimator.Play("yellowLockedLock");
                 break; 
         }
     }
