@@ -126,6 +126,9 @@ public class GameBoard : MonoBehaviour
 
     private void FillPathToLockedList(List<GridSquare> path, List<GridSquare> lockedList, int count)
     {
+        if (count < lockedList.Count)
+            count = lockedList.Count;
+        
         for (int i = 0; i < count; i++)
         {
             path.Add(lockedList[i]);
