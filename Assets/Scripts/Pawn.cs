@@ -19,6 +19,7 @@ public class Pawn : MonoBehaviour
     public int pawnIndex;
     
     private bool _isPassive = true;
+    private bool _isOnEnd = false;
 
     private void Awake()
     {
@@ -35,6 +36,8 @@ public class Pawn : MonoBehaviour
     public GridSquare GetGrid() => _currentGridSquare;
     public TeamColor GetPawnColor() => _pawnColor;
     public bool IsPassive() => _isPassive;
+
+    public bool IsOnEnd() => _isOnEnd;
 
     public IEnumerator Move(List<GridSquare> path)
     {
@@ -87,4 +90,6 @@ public class Pawn : MonoBehaviour
         _currentGridSquare.UnRegisterPawn(this);
         transform.DOJump(pos.position, .5f, 1, 1);
     }
+
+    public void DoOnEnd() => _isOnEnd = true;
 }

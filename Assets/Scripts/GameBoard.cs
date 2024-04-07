@@ -122,14 +122,50 @@ public class GameBoard : MonoBehaviour
             
             if (currentIndex + dice > lockedList.Count)
                 return null;
-            
-            for (int i = 1; i <= dice; i++)
+            if (currentIndex + dice <= lockedList.Count)
             {
-                possiblePath.Add(lockedList[(currentIndex + i)%lockedList.Count]);
+                for (int i = 1; i <= dice; i++)
+                {
+                    if(currentIndex + i < lockedList.Count)
+                        possiblePath.Add(lockedList[(currentIndex + i)]);
+                }
+
+                if (CheckPawnCanGoEnd(p, lockedList))
+                {
+                    AddLastGridToThePath(p.GetPawnColor(),possiblePath);
+                    p.DoOnEnd();
+                }
             }
+            
         }
         
         return possiblePath;
+    }
+
+    private bool CheckPawnCanGoEnd(Pawn p,List<GridSquare> lockedList)
+    {
+        if (p.GetGrid() == lockedList[lockedList.Count - 1])
+            return true;
+        return false;
+    }
+
+    private void AddLastGridToThePath(TeamColor color, List<GridSquare> path)
+    {
+        switch (color)
+        {
+            case TeamColor.RED:
+                path.Add(redPawnLastGrid);
+                break;
+            case TeamColor.GREEN:
+                path.Add(greenPawnLastGrid);
+                break;
+            case TeamColor.YELLOW:
+                path.Add(yellowPawnLastGrid);
+                break;
+            case TeamColor.BLUE:
+                path.Add(bluePawnLastGrid);
+                break;
+        }
     }
 
     private void FillPathToLockedList(List<GridSquare> path, List<GridSquare> lockedList, int count)
@@ -232,7 +268,7 @@ public class GameBoard : MonoBehaviour
     [Button("Move Pawn")]
     public void MovePawn(Pawn p,int dice)
     {
-        if (!p.IsPassive())
+        if (!p.IsPassive() && !p.IsOnEnd())
         {
             p.StartCoroutine(p.Move(GetPawnPossiblePath(p,dice)));
         }
@@ -270,7 +306,7 @@ public class GameBoard : MonoBehaviour
     }
 
     [Button("Turn Board")]
-    private void TurnBoardAccordingCoolor(TeamColor color)
+    public void TurnBoardAccordingColor(TeamColor color)
     {
         switch (color)
         {
@@ -291,7 +327,7 @@ public class GameBoard : MonoBehaviour
     }
 
     [Button("Unlock Locked Path")]
-    private void OnLockedOpen(TeamColor color)
+    public void OnLockedOpen(TeamColor color)
     {
         switch (color)
         {
@@ -314,7 +350,7 @@ public class GameBoard : MonoBehaviour
         }
     }
     [Button("Lock Locked Path")]
-    private void CloseLocked(TeamColor color)
+    public void CloseLocked(TeamColor color)
     {
         switch (color)
         {
