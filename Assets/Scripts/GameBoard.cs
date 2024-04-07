@@ -19,7 +19,10 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private List<GridSquare> blueLockedGridList = new List<GridSquare>();
     [SerializeField] private List<GridSquare> redLockedGridList = new List<GridSquare>();
     [SerializeField] private List<GridSquare> yellowLockedGridList = new List<GridSquare>();
-    
+    [SerializeField] private GridSquare greenPawnLastGrid;
+    [SerializeField] private GridSquare redPawnLastGrid;
+    [SerializeField] private GridSquare yellowPawnLastGrid;
+    [SerializeField] private GridSquare bluePawnLastGrid;
     
     [Header("Locked Info")] 
     [SerializeField] private bool isGreenLockedOpen;
@@ -37,6 +40,7 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private List<Transform> redPawnsPosList = new List<Transform>();
     [SerializeField] private List<Transform> yellowPawnsPosList = new List<Transform>();
     [SerializeField] private List<Transform> greenPawnsPosList = new List<Transform>();
+    
 
     private Animator _lockAnimator;
     
@@ -85,7 +89,7 @@ public class GameBoard : MonoBehaviour
         {
             // Eger piyon yıldızın ustundeyse ve kilitler acıksa
             if (p.GetGrid().IsStar && p.GetPawnColor() == p.GetGrid().StarColor &&
-                CheckIsLocked(p.GetPawnColor()))
+                CheckIsLockedOpen(p.GetPawnColor()))
             {
                 FillPathToLockedList(possiblePath,lockedList,dice);
                 return possiblePath;
@@ -95,7 +99,7 @@ public class GameBoard : MonoBehaviour
             for (int i = 1; i <= dice; i++)
             {
                 // Eger kilitler acık degilse
-                if(!CheckIsLocked(p.GetPawnColor()))
+                if(!CheckIsLockedOpen(p.GetPawnColor()))
                     possiblePath.Add(gridList[(currentIndex + i)%gridList.Count]);
                 else
                 {
@@ -115,6 +119,10 @@ public class GameBoard : MonoBehaviour
         else
         {
             currentIndex = lockedList.IndexOf(p.GetGrid());
+            
+            if (currentIndex + dice > lockedList.Count)
+                return null;
+            
             for (int i = 1; i <= dice; i++)
             {
                 possiblePath.Add(lockedList[(currentIndex + i)%lockedList.Count]);
@@ -126,8 +134,6 @@ public class GameBoard : MonoBehaviour
 
     private void FillPathToLockedList(List<GridSquare> path, List<GridSquare> lockedList, int count)
     {
-        if (count < lockedList.Count)
-            count = lockedList.Count;
         
         for (int i = 0; i < count; i++)
         {
@@ -152,7 +158,7 @@ public class GameBoard : MonoBehaviour
         return null;
     }
 
-    private bool CheckIsLocked(TeamColor color)
+    private bool CheckIsLockedOpen(TeamColor color)
     {
         bool b = false;
         switch (color)

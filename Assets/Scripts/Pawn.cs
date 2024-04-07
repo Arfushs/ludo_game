@@ -38,6 +38,8 @@ public class Pawn : MonoBehaviour
 
     public IEnumerator Move(List<GridSquare> path)
     {
+        if (path == null)
+            yield break;
         float duration = .2f;
         _currentGridSquare.UnRegisterPawn(this);
         foreach (GridSquare grid in path)
