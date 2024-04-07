@@ -10,11 +10,15 @@ Material:
   m_Name: cfxr smoke cloud x4 ab
   m_Shader: {fileID: -6465566751694194690, guid: 1a29b4d27eb8b04479ef89c00dea533d,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ALPHABLEND_ON
+  - _ALPHAPREMULTIPLY_ON
+  - _ALPHATEST_ON
   - _CFXR_DISSOLVE
   - _CFXR_DITHERED_SHADOWS_ON
-  - _FADING_ON
+  - _CFXR_FONT_COLORS
+  - _CFXR_HDR_BOOST
   m_InvalidKeywords:
   - _
   - _CFXR_OVERLAYBLEND_RGBA
@@ -25,6 +29,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -63,7 +68,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _BacklightTransmittance: 1
-    - _BlendingType: 0
+    - _BlendingType: 1
     - _BumpScale: 1
     - _CFXR_DITHERED_SHADOWS: 1
     - _CFXR_OVERLAYBLEND: 0
@@ -78,8 +83,8 @@ Material:
     - _DstBlend: 10
     - _EdgeFadePow: 1
     - _FadeAlongU: 0
-    - _HdrBoost: 0
-    - _HdrMultiply: 3
+    - _HdrBoost: 1
+    - _HdrMultiply: 1.5
     - _IndirectLightingMix: 0.5
     - _InvertDissolveTex: 0
     - _LightingWorldPosStrength: 0.2
@@ -87,25 +92,25 @@ Material:
     - _OVERLAYTEX: 0
     - _ReceivedShadowsStrength: 0.5
     - _SecondColorSmooth: 0.2
-    - _ShadowStrength: 0.5
+    - _ShadowStrength: 0.1
     - _SingleChannel: 0
     - _SoftParticlesFadeDistanceFar: 1
     - _SoftParticlesFadeDistanceNear: 0
     - _SrcBlend: 5
     - _UVDistortionAdd: 0
-    - _UseAlphaClip: 0
+    - _UseAlphaClip: 1
     - _UseBackLighting: 0
     - _UseDissolve: 1
     - _UseDissolveOffsetUV: 0
     - _UseEF: 0
     - _UseEmission: 0
     - _UseFB: 0
-    - _UseFontColor: 0
+    - _UseFontColor: 1
     - _UseGradientMap: 0
     - _UseLighting: 0
     - _UseLightingWorldPosOffset: 0
     - _UseNormalMap: 0
-    - _UseSP: 1
+    - _UseSP: 0
     - _UseSecondColor: 0
     - _UseUV2Distortion: 0
     - _UseUVDistortion: 0

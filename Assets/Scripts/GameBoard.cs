@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameBoard : MonoBehaviour
 {
@@ -17,12 +19,16 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private List<GridSquare> blueLockedGridList = new List<GridSquare>();
     [SerializeField] private List<GridSquare> redLockedGridList = new List<GridSquare>();
     [SerializeField] private List<GridSquare> yellowLockedGridList = new List<GridSquare>();
+    [SerializeField] private GridSquare greenPawnLastGrid;
+    [SerializeField] private GridSquare redPawnLastGrid;
+    [SerializeField] private GridSquare yellowPawnLastGrid;
+    [SerializeField] private GridSquare bluePawnLastGrid;
     
     [Header("Locked Info")] 
-    [SerializeField] private bool isGreenLocked;
-    [SerializeField] private bool isYellowLocked;
-    [SerializeField] private bool isBlueLocked;
-    [SerializeField] private bool isRedLocked;
+    [SerializeField] private bool isGreenLockedOpen;
+    [SerializeField] private bool isYellowLockedOpen;
+    [SerializeField] private bool isBlueLockedOpen;
+    [SerializeField] private bool isRedLockedOpen;
 
     [Header("Pawn Info")] 
     [SerializeField] private List<Pawn> bluePawnsList = new List<Pawn>();
@@ -35,6 +41,8 @@ public class GameBoard : MonoBehaviour
     [SerializeField] private List<Transform> yellowPawnsPosList = new List<Transform>();
     [SerializeField] private List<Transform> greenPawnsPosList = new List<Transform>();
     
+
+    private Animator _lockAnimator;
     
     private void Awake()
     {
@@ -47,12 +55,28 @@ public class GameBoard : MonoBehaviour
             gridList.Add(grid);
             counter++;
         }
-        
+
+        _lockAnimator = GetComponent<Animator>();
+
+    }
+    
+
+    private void OnEnable()
+    {
+        EventManager.OnPawnBroken += OnPawnBroken;
+        EventManager.OnLockedOpen += OnLockedOpen;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnPawnBroken -= OnPawnBroken;
+        EventManager.OnLockedOpen -= OnLockedOpen;
     }
 
     private void Start()
     {
         PutPawnsIntoInitialPositions();
+        
     }
     
     private List<GridSquare> GetPawnPossiblePath(Pawn p, int dice)
@@ -65,7 +89,7 @@ public class GameBoard : MonoBehaviour
         {
             // Eger piyon yıldızın ustundeyse ve kilitler acıksa
             if (p.GetGrid().IsStar && p.GetPawnColor() == p.GetGrid().StarColor &&
-                CheckIsLocked(p.GetPawnColor()))
+                CheckIsLockedOpen(p.GetPawnColor()))
             {
                 FillPathToLockedList(possiblePath,lockedList,dice);
                 return possiblePath;
@@ -75,7 +99,7 @@ public class GameBoard : MonoBehaviour
             for (int i = 1; i <= dice; i++)
             {
                 // Eger kilitler acık degilse
-                if(!CheckIsLocked(p.GetPawnColor()))
+                if(!CheckIsLockedOpen(p.GetPawnColor()))
                     possiblePath.Add(gridList[(currentIndex + i)%gridList.Count]);
                 else
                 {
@@ -91,20 +115,62 @@ public class GameBoard : MonoBehaviour
                 }
             }
         }
+        // Eğer piyon kilidin üstündeyse
         else
         {
             currentIndex = lockedList.IndexOf(p.GetGrid());
-            for (int i = 1; i <= dice; i++)
+            
+            if (currentIndex + dice > lockedList.Count)
+                return null;
+            if (currentIndex + dice <= lockedList.Count)
             {
-                possiblePath.Add(lockedList[(currentIndex + i)%lockedList.Count]);
+                for (int i = 1; i <= dice; i++)
+                {
+                    if(currentIndex + i < lockedList.Count)
+                        possiblePath.Add(lockedList[(currentIndex + i)]);
+                }
+
+                if (CheckPawnCanGoEnd(p, lockedList))
+                {
+                    AddLastGridToThePath(p.GetPawnColor(),possiblePath);
+                    p.DoOnEnd();
+                }
             }
+            
         }
         
         return possiblePath;
     }
 
+    private bool CheckPawnCanGoEnd(Pawn p,List<GridSquare> lockedList)
+    {
+        if (p.GetGrid() == lockedList[lockedList.Count - 1])
+            return true;
+        return false;
+    }
+
+    private void AddLastGridToThePath(TeamColor color, List<GridSquare> path)
+    {
+        switch (color)
+        {
+            case TeamColor.RED:
+                path.Add(redPawnLastGrid);
+                break;
+            case TeamColor.GREEN:
+                path.Add(greenPawnLastGrid);
+                break;
+            case TeamColor.YELLOW:
+                path.Add(yellowPawnLastGrid);
+                break;
+            case TeamColor.BLUE:
+                path.Add(bluePawnLastGrid);
+                break;
+        }
+    }
+
     private void FillPathToLockedList(List<GridSquare> path, List<GridSquare> lockedList, int count)
     {
+        
         for (int i = 0; i < count; i++)
         {
             path.Add(lockedList[i]);
@@ -128,22 +194,22 @@ public class GameBoard : MonoBehaviour
         return null;
     }
 
-    private bool CheckIsLocked(TeamColor color)
+    private bool CheckIsLockedOpen(TeamColor color)
     {
         bool b = false;
         switch (color)
         {
             case TeamColor.RED:
-                b = isRedLocked;
+                b = isRedLockedOpen;
                 break;
             case TeamColor.GREEN:
-                b = isGreenLocked;
+                b = isGreenLockedOpen;
                 break;
             case TeamColor.YELLOW:
-                b = isYellowLocked;
+                b = isYellowLockedOpen;
                 break;
             case TeamColor.BLUE:
-                b = isBlueLocked;
+                b = isBlueLockedOpen;
                 break;
         }
         return b;
@@ -202,7 +268,7 @@ public class GameBoard : MonoBehaviour
     [Button("Move Pawn")]
     public void MovePawn(Pawn p,int dice)
     {
-        if (!p.IsPassive())
+        if (!p.IsPassive() && !p.IsOnEnd())
         {
             p.StartCoroutine(p.Move(GetPawnPossiblePath(p,dice)));
         }
@@ -233,6 +299,79 @@ public class GameBoard : MonoBehaviour
     }
 
     #endregion
+
+    private void OnPawnBroken(Pawn p)
+    {
+        DoPassivePawn(p);
+    }
+
+    [Button("Turn Board")]
+    public void TurnBoardAccordingColor(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                transform.DORotate(new Vector3(0,-90,0), 0.5f);
+                break;
+            case TeamColor.RED:
+                transform.DORotate(new Vector3(0,180,0), 0.5f);
+                break;
+            case TeamColor.GREEN:
+                isGreenLockedOpen = true;
+                transform.DORotate(new Vector3(0,90,0), 0.5f);
+                break;
+            case TeamColor.YELLOW:
+                transform.DORotate(new Vector3(0,0,0), 0.5f);
+                break; 
+        }
+    }
+
+    [Button("Unlock Locked Path")]
+    public void OnLockedOpen(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                isBlueLockedOpen = true;
+                _lockAnimator.Play("blueLockedOpen");
+                break;
+            case TeamColor.RED:
+                isRedLockedOpen = true;
+                _lockAnimator.Play("redLockedOpen");
+                break;
+            case TeamColor.GREEN:
+                isGreenLockedOpen = true;
+                _lockAnimator.Play("greenLockedOpen");
+                break;
+            case TeamColor.YELLOW:
+                isYellowLockedOpen = true;
+                _lockAnimator.Play("yellowLockedOpen");
+                break; 
+        }
+    }
+    [Button("Lock Locked Path")]
+    public void CloseLocked(TeamColor color)
+    {
+        switch (color)
+        {
+            case TeamColor.BLUE:
+                isBlueLockedOpen = false;
+                _lockAnimator.Play("blueLockedLock");
+                break;
+            case TeamColor.RED:
+                isRedLockedOpen = false;
+                _lockAnimator.Play("redLockedLock");
+                break;
+            case TeamColor.GREEN:
+                isGreenLockedOpen = false;
+                _lockAnimator.Play("greenLockedLock");
+                break;
+            case TeamColor.YELLOW:
+                isYellowLockedOpen = false;
+                _lockAnimator.Play("yellowLockedLock");
+                break; 
+        }
+    }
     
     
 }
